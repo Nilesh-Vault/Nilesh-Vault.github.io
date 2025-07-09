@@ -1,465 +1,1309 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fi Money AI - Financial Dashboard (Complete)</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <style>
-        :root {
-            --bg-primary: #101113;
-            --bg-secondary: #1C1C1E;
-            --bg-tertiary: #2C2C2E;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --text-primary: #F0F0F0;
-            --text-secondary: #8A8A8E;
-            --accent-blue: #0A84FF;
-            --accent-green: #30D158;
-            --accent-red: #FF453A;
-            --accent-yellow: #FFD60A;
-            --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+      :root {
+        --bg-primary: #101113;
+        --bg-secondary: #1c1c1e;
+        --bg-tertiary: #2c2c2e;
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-primary: #f0f0f0;
+        --text-secondary: #8a8a8e;
+        --accent-blue: #0a84ff;
+        --accent-green: #30d158;
+        --accent-red: #ff453a;
+        --accent-yellow: #ffd60a;
+        --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        --font-mono: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono",
+          monospace;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: var(--font-main);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      /* Sidebar Navigation */
+      .sidebar {
+        width: 260px;
+        background: var(--bg-primary);
+        border-right: 1px solid var(--border-color);
+        padding: 24px 0;
+        position: fixed;
+        height: 100vh;
+        z-index: 10;
+      }
+      .logo {
+        padding: 0 24px 24px;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 24px;
+      }
+      .logo h1 {
+        color: var(--text-primary);
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .nav-item {
+        padding: 12px 24px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.2s;
+      }
+      .nav-item:hover,
+      .nav-item.active {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border-right: 3px solid var(--accent-blue);
+      }
+      .nav-icon {
+        width: 20px;
+        height: 20px;
+        opacity: 0.7;
+        background-color: var(--text-secondary);
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z' /%3E%3C/svg%3E");
+        mask-size: contain;
+        mask-repeat: no-repeat;
+      }
+      .nav-item:hover .nav-icon,
+      .nav-item.active .nav-icon {
+        background-color: var(--text-primary);
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        margin-left: 260px;
+        padding: 24px;
+        display: flex;
+        gap: 24px;
+      }
+      .dashboard {
+        flex: 1;
+        max-width: calc(100% - 420px);
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 32px;
+      }
+      .header h2 {
+        font-size: 28px;
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .notification-bell {
+        position: relative;
+        cursor: pointer;
+        color: var(--text-secondary);
+      }
+      .notification-bell:hover {
+        color: var(--text-primary);
+      }
+      .notification-dot {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 8px;
+        height: 8px;
+        background: var(--accent-red);
+        border-radius: 50%;
+        border: 2px solid var(--bg-primary);
+      }
+      .avatar {
+        width: 40px;
+        height: 40px;
+        background: var(--accent-blue);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+      }
+
+      /* Dashboard Grid & Cards */
+      .dashboard-grid,
+      .small-widget-grid {
+        display: grid;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+      .dashboard-grid {
+        grid-template-columns: 2fr 1fr;
+      }
+      .small-widget-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+      .card {
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        padding: 24px;
+        border: 1px solid var(--border-color);
+      }
+      .card h3 {
+        font-size: 18px;
+        color: var(--text-primary);
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+
+      /* Net Worth */
+      .net-worth-value {
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--accent-green);
+        margin-bottom: 8px;
+      }
+      .net-worth-change {
+        color: var(--accent-green);
+        font-size: 14px;
+      }
+      .metric-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 24px;
+      }
+      .metric-card {
+        background: var(--bg-tertiary);
+        padding: 16px;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .metric-label {
+        font-size: 12px;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .metric-value {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-top: 4px;
+      }
+
+      /* --- NEW: AI Summary Card --- */
+      .ai-summary-card {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        background-color: #202437;
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 24px;
+      }
+      body.dark-theme .ai-summary-card {
+        background-color: #38455a;
+      }
+      .ai-summary-card .material-symbols-outlined {
+        font-size: 28px;
+        color: var(--google-blue);
+        background: linear-gradient(135deg, #4285f4, #34a853);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .ai-summary-text p {
+        margin: 0;
+        color: gainsboro;
+      }
+      .ai-summary-text strong {
+        color: whitesmoke;
+        font-weight: 500;
+      }
+
+      /* --- GRAPH: Monthly Cashflow --- */
+      .cashflow-chart-container {
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+      }
+      .cashflow-chart {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        flex-grow: 1;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 8px;
+      }
+      .chart-bar-group {
+        display: flex;
+        gap: 4px;
+        align-items: flex-end;
+        height: 100%;
+      }
+      .bar {
+        width: 12px;
+        border-radius: 4px 4px 0 0;
+        transition: height 0.5s ease-out;
+        animation: grow 0.8s ease-out forwards;
+      }
+      .bar.income {
+        background-color: var(--accent-green);
+      }
+      .bar.expense {
+        background-color: var(--accent-red);
+      }
+      .chart-labels {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 8px;
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+      @keyframes grow {
+        from {
+          transform: scaleY(0);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-main); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
-        .container { display: flex; min-height: 100vh; }
-
-        /* Sidebar Navigation */
-        .sidebar { width: 260px; background: var(--bg-primary); border-right: 1px solid var(--border-color); padding: 24px 0; position: fixed; height: 100vh; z-index: 10; }
-        .logo { padding: 0 24px 24px; border-bottom: 1px solid var(--border-color); margin-bottom: 24px; }
-        .logo h1 { color: var(--text-primary); font-size: 20px; font-weight: 700; }
-        .nav-item { padding: 12px 24px; color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 12px; transition: all 0.2s; }
-        .nav-item:hover, .nav-item.active { background: var(--bg-secondary); color: var(--text-primary); border-right: 3px solid var(--accent-blue); }
-        .nav-icon { width: 20px; height: 20px; opacity: 0.7; background-color: var(--text-secondary); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z' /%3E%3C/svg%3E"); mask-size: contain; mask-repeat: no-repeat; }
-        .nav-item:hover .nav-icon, .nav-item.active .nav-icon { background-color: var(--text-primary); }
-
-        /* Main Content */
-        .main-content { flex: 1; margin-left: 260px; padding: 24px; display: flex; gap: 24px; }
-        .dashboard { flex: 1; max-width: calc(100% - 420px); }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
-        .header h2 { font-size: 28px; color: var(--text-primary); font-weight: 600; }
-        .user-info { display: flex; align-items: center; gap: 16px; }
-        .notification-bell { position: relative; cursor: pointer; color: var(--text-secondary); }
-        .notification-bell:hover { color: var(--text-primary); }
-        .notification-dot { position: absolute; top: 0; right: 0; width: 8px; height: 8px; background: var(--accent-red); border-radius: 50%; border: 2px solid var(--bg-primary); }
-        .avatar { width: 40px; height: 40px; background: var(--accent-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; }
-
-        /* Dashboard Grid & Cards */
-        .dashboard-grid, .small-widget-grid { display: grid; gap: 24px; margin-bottom: 32px; }
-        .dashboard-grid { grid-template-columns: 2fr 1fr; }
-        .small-widget-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-        .card { background: var(--bg-secondary); border-radius: 12px; padding: 24px; border: 1px solid var(--border-color); }
-        .card h3 { font-size: 18px; color: var(--text-primary); margin-bottom: 16px; font-weight: 600; }
-        
-        /* Net Worth */
-        .net-worth-value { font-size: 36px; font-weight: 700; color: var(--accent-green); margin-bottom: 8px; }
-        .net-worth-change { color: var(--accent-green); font-size: 14px; }
-        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-        .metric-card { background: var(--bg-tertiary); padding: 16px; border-radius: 8px; text-align: center; }
-        .metric-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
-        .metric-value { font-size: 20px; font-weight: 600; color: var(--text-primary); margin-top: 4px; }
-
-
-
-        /* --- NEW: AI Summary Card --- */
-        .ai-summary-card {
-            display: flex; gap: 16px; align-items: flex-start;
-            background-color: #e8f0fe;
-            border-radius: 16px; padding: 20px; margin-bottom: 24px;
+        to {
+          transform: scaleY(1);
         }
-        body.dark-theme .ai-summary-card { background-color: #38455a; }
-        .ai-summary-card .material-symbols-outlined {
-            font-size: 28px; color: var(--google-blue);
-            background: linear-gradient(135deg, #4285F4, #34A853);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      }
+
+      /* --- GRAPH: Investment Health Score (Doughnut Chart) --- */
+      .health-score-card {
+        text-align: center;
+      }
+      .doughnut-chart-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0;
+      }
+      .doughnut-chart {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: conic-gradient(
+          var(--accent-blue) 0% 60%,
+          var(--accent-green) 60% 85%,
+          var(--accent-yellow) 85% 100%
+        );
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .doughnut-center {
+        width: 100px;
+        height: 100px;
+        background: var(--bg-secondary);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .health-score-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+      .health-score-label {
+        font-size: 12px;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+      }
+
+      /* --- GRAPH: Financial Wellness Score --- */
+      .wellness-metric {
+        margin-bottom: 20px;
+      }
+      .wellness-metric:last-child {
+        margin-bottom: 0;
+      }
+      .wellness-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 8px;
+      }
+      .wellness-label {
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+      .wellness-value {
+        font-size: 14px;
+        color: var(--text-secondary);
+      }
+      .trend-arrow {
+        font-weight: bold;
+        margin-left: 4px;
+      }
+      .trend-arrow.up {
+        color: var(--accent-green);
+      }
+      .trend-arrow.down {
+        color: var(--accent-red);
+      }
+      .progress-bar {
+        height: 8px;
+        background: var(--bg-tertiary);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        border-radius: 4px;
+      }
+
+      /* Insight Cards */
+      .insights-section {
+        margin-bottom: 32px;
+      }
+      .insights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 16px;
+      }
+      .insight-card {
+        background: var(--bg-secondary);
+        border-radius: 8px;
+        padding: 20px;
+      }
+      .insight-card.warning {
+        border-left: 4px solid var(--accent-yellow);
+      }
+      .insight-card.success {
+        border-left: 4px solid var(--accent-green);
+      }
+      .insight-card.info {
+        border-left: 4px solid var(--accent-blue);
+      }
+      .insight-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .insight-title {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .insight-badge {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .insight-badge.warning {
+        background: rgba(255, 214, 10, 0.2);
+        color: var(--accent-yellow);
+      }
+      .insight-badge.success {
+        background: rgba(48, 209, 88, 0.2);
+        color: var(--accent-green);
+      }
+      .insight-badge.info {
+        background: rgba(10, 132, 255, 0.2);
+        color: var(--accent-blue);
+      }
+      .insight-text {
+        color: var(--text-secondary);
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+      .insight-action {
+        background: var(--accent-blue);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 14px;
+        display: inline-block;
+        transition: background-color 0.2s;
+      }
+      .insight-action:hover {
+        background-color: #0070e0;
+      }
+
+      /* Performance Section */
+      .performance-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      /* --- GRAPH: SIP Performance Tracker --- */
+      .sip-list {
+        margin-top: 16px;
+      }
+      .sip-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .sip-item:last-child {
+        border-bottom: none;
+      }
+      .sip-details {
+        flex-grow: 1;
+      }
+      .sip-name {
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+      .sip-performance {
+        color: var(--text-secondary);
+        font-size: 13px;
+      }
+      .performance-delta {
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: right;
+        width: 70px;
+      }
+      .performance-delta.negative {
+        background: rgba(255, 69, 58, 0.2);
+        color: var(--accent-red);
+      }
+      .performance-delta.positive {
+        background: rgba(48, 209, 88, 0.2);
+        color: var(--accent-green);
+      }
+      .performance-strip {
+        height: 6px;
+        background-color: var(--bg-tertiary);
+        border-radius: 3px;
+        margin-top: 8px;
+        position: relative;
+      }
+      .strip-fill {
+        height: 100%;
+        border-radius: 3px;
+      }
+      .strip-fill.negative {
+        background-color: var(--accent-red);
+      }
+      .strip-fill.positive {
+        background-color: var(--accent-green);
+      }
+      .strip-benchmark {
+        position: absolute;
+        top: -3px;
+        bottom: -3px;
+        width: 2px;
+        background-color: var(--text-secondary);
+      }
+
+      /* --- GRAPH: Goal Timeline --- */
+      .goal-timeline-container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding-top: 10px;
+      }
+      .goal-item .progress-bar {
+        background-image: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 24.5%,
+          var(--border-color) 25%
+        );
+        background-size: 25% 100%;
+      }
+      .goal-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-top: 8px;
+      }
+
+      /* Chat Assistant Panel */
+      .chat-panel {
+        width: 400px;
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        max-height: calc(100vh - 48px);
+        position: sticky;
+        top: 24px;
+        border: 1px solid var(--border-color);
+      }
+      .chat-header {
+        padding: 20px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ai-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0a84ff 0%, #af52de 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .chat-title {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .chat-history {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        min-height: 200px;
+        max-height: 450px;
+      }
+      .chat-message {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      .message-user {
+        background: var(--accent-blue);
+        color: white;
+        padding: 12px 16px;
+        border-radius: 12px 12px 4px 12px;
+        margin-left: auto;
+        max-width: 85%;
+        word-wrap: break-word;
+        font-size: 15px;
+      }
+      .message-ai {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        padding: 16px;
+        border-radius: 12px 12px 12px 4px;
+        margin-right: auto;
+        max-width: 95%;
+      }
+      .audit-trail-trigger {
+        font-size: 11px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        display: inline-block;
+        margin-top: 12px;
+      }
+      .audit-trail-trigger:hover {
+        color: var(--text-primary);
+      }
+      .audit-trail-details {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        padding: 12px;
+        border-radius: 6px;
+        margin-top: 8px;
+        font-size: 12px;
+        color: var(--text-secondary);
+        font-family: var(--font-mono);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out,
+          margin 0.3s ease-out;
+        padding: 0 12px;
+        margin: 0;
+      }
+      .audit-trail-details.visible {
+        max-height: 200px;
+        padding: 12px;
+        margin-top: 8px;
+      }
+      .confidence-score {
+        background: rgba(48, 209, 88, 0.2);
+        border: 1px solid var(--accent-green);
+        padding: 4px 8px;
+        border-radius: 99px;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--accent-green);
+        display: inline-block;
+      }
+      .chat-input {
+        padding: 20px;
+        border-top: 1px solid var(--border-color);
+        background: var(--bg-primary);
+        border-radius: 0 0 12px 12px;
+      }
+      .input-container {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .chat-input input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+      }
+      .chat-input input:focus {
+        border-color: var(--accent-blue);
+      }
+      .icon-btn,
+      .send-btn {
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .icon-btn:hover {
+        background: #333;
+        color: var(--text-primary);
+      }
+      .send-btn {
+        background: var(--accent-blue);
+        color: white;
+        padding: 10px 16px;
+        font-weight: 500;
+        border: none;
+      }
+      .send-btn:hover {
+        background: #0070e0;
+      }
+      .response-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 12px;
+      }
+      .response-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .response-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 14px;
+      }
+      .response-recommendation {
+        background: rgba(10, 132, 255, 0.1);
+        padding: 12px;
+        border-radius: 6px;
+        border-left: 3px solid var(--accent-blue);
+        font-size: 14px;
+        color: var(--text-primary);
+      }
+      .response-recommendation strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--accent-blue);
+      }
+      .response-recommendation ul {
+        list-style-type: "• ";
+        padding-left: 20px;
+        margin: 0;
+      }
+      .suggestion-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .suggestion-pill {
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid var(--border-color);
+      }
+      .suggestion-pill:hover {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+      }
+      .message-thinking {
+        font-style: italic;
+        background: rgba(10, 132, 255, 0.1);
+        border: 1px solid rgba(10, 132, 255, 0.2);
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        color: var(--accent-blue);
+        align-self: flex-start;
+      }
+      .thinking-dots::after {
+        content: " .";
+        animation: dots 1.5s steps(5, end) infinite;
+      }
+      @keyframes dots {
+        0%,
+        20% {
+          content: " .";
         }
-        .ai-summary-text p { margin: 0; color: var(--text-secondary); }
-        .ai-summary-text strong { color: var(--text-primary); font-weight: 500; }
-
-        /* --- GRAPH: Monthly Cashflow --- */
-        .cashflow-chart-container { height: 200px; display: flex; flex-direction: column; }
-        .cashflow-chart { display: flex; justify-content: space-around; align-items: flex-end; flex-grow: 1; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
-        .chart-bar-group { display: flex; gap: 4px; align-items: flex-end; height: 100%; }
-        .bar { width: 12px; border-radius: 4px 4px 0 0; transition: height 0.5s ease-out; animation: grow 0.8s ease-out forwards; }
-        .bar.income { background-color: var(--accent-green); }
-        .bar.expense { background-color: var(--accent-red); }
-        .chart-labels { display: flex; justify-content: space-around; padding-top: 8px; font-size: 12px; color: var(--text-secondary); }
-        @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-
-        /* --- GRAPH: Investment Health Score (Doughnut Chart) --- */
-        .health-score-card { text-align: center; }
-        .doughnut-chart-container { display: flex; justify-content: center; align-items: center; padding: 10px 0; }
-        .doughnut-chart {
-            width: 140px; height: 140px; border-radius: 50%;
-            background: conic-gradient(
-                var(--accent-blue) 0% 60%, 
-                var(--accent-green) 60% 85%, 
-                var(--accent-yellow) 85% 100%
-            );
-            position: relative;
-            display: flex; justify-content: center; align-items: center;
+        40% {
+          content: " ..";
         }
-        .doughnut-center {
-            width: 100px; height: 100px; background: var(--bg-secondary);
-            border-radius: 50%; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+        60% {
+          content: " ...";
         }
-        .health-score-value { font-size: 28px; font-weight: 700; color: var(--text-primary); }
-        .health-score-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; }
+        80%,
+        100% {
+          content: " ...";
+        }
+      }
 
-        /* --- GRAPH: Financial Wellness Score --- */
-        .wellness-metric { margin-bottom: 20px; }
-        .wellness-metric:last-child { margin-bottom: 0; }
-        .wellness-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
-        .wellness-label { font-weight: 500; color: var(--text-primary); }
-        .wellness-value { font-size: 14px; color: var(--text-secondary); }
-        .trend-arrow { font-weight: bold; margin-left: 4px; }
-        .trend-arrow.up { color: var(--accent-green); }
-        .trend-arrow.down { color: var(--accent-red); }
-        .progress-bar { height: 8px; background: var(--bg-tertiary); border-radius: 4px; overflow: hidden; }
-        .progress-fill { height: 100%; border-radius: 4px; }
-
-        /* Insight Cards */
-        .insights-section { margin-bottom: 32px; }
-        .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 16px; }
-        .insight-card { background: var(--bg-secondary); border-radius: 8px; padding: 20px; }
-        .insight-card.warning { border-left: 4px solid var(--accent-yellow); }
-        .insight-card.success { border-left: 4px solid var(--accent-green); }
-        .insight-card.info { border-left: 4px solid var(--accent-blue); }
-        .insight-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .insight-title { font-weight: 600; color: var(--text-primary); }
-        .insight-badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; }
-        .insight-badge.warning { background: rgba(255, 214, 10, 0.2); color: var(--accent-yellow); }
-        .insight-badge.success { background: rgba(48, 209, 88, 0.2); color: var(--accent-green); }
-        .insight-badge.info { background: rgba(10, 132, 255, 0.2); color: var(--accent-blue); }
-        .insight-text { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
-        .insight-action { background: var(--accent-blue); color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; display: inline-block; transition: background-color 0.2s; }
-        .insight-action:hover { background-color: #0070e0; }
-
-        /* Performance Section */
-        .performance-section { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
-        
-        /* --- GRAPH: SIP Performance Tracker --- */
-        .sip-list { margin-top: 16px; }
-        .sip-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border-color); }
-        .sip-item:last-child { border-bottom: none; }
-        .sip-details { flex-grow: 1; }
-        .sip-name { font-weight: 500; color: var(--text-primary); }
-        .sip-performance { color: var(--text-secondary); font-size: 13px; }
-        .performance-delta { padding: 4px 8px; border-radius: 4px; font-size: 14px; font-weight: 600; text-align: right; width: 70px; }
-        .performance-delta.negative { background: rgba(255, 69, 58, 0.2); color: var(--accent-red); }
-        .performance-delta.positive { background: rgba(48, 209, 88, 0.2); color: var(--accent-green); }
-        .performance-strip { height: 6px; background-color: var(--bg-tertiary); border-radius: 3px; margin-top: 8px; position: relative; }
-        .strip-fill { height: 100%; border-radius: 3px; }
-        .strip-fill.negative { background-color: var(--accent-red); }
-        .strip-fill.positive { background-color: var(--accent-green); }
-        .strip-benchmark { position: absolute; top: -3px; bottom: -3px; width: 2px; background-color: var(--text-secondary); }
-
-        /* --- GRAPH: Goal Timeline --- */
-        .goal-timeline-container { display: flex; flex-direction: column; gap: 24px; padding-top: 10px; }
-        .goal-item .progress-bar { background-image: repeating-linear-gradient(90deg, transparent, transparent 24.5%, var(--border-color) 25%); background-size: 25% 100%; }
-        .goal-info { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-secondary); margin-top: 8px; }
-
-        /* Chat Assistant Panel */
-        .chat-panel { width: 400px; background: var(--bg-secondary); border-radius: 12px; display: flex; flex-direction: column; height: fit-content; max-height: calc(100vh - 48px); position: sticky; top: 24px; border: 1px solid var(--border-color); }
-        .chat-header { padding: 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; }
-        .ai-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #0A84FF 0%, #AF52DE 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 14px; }
-        .chat-title { font-weight: 600; color: var(--text-primary); }
-        .chat-history { flex: 1; padding: 20px; overflow-y: auto; min-height: 200px; max-height: 450px; }
-        .chat-message { margin-bottom: 20px; display: flex; flex-direction: column; }
-        .message-user { background: var(--accent-blue); color: white; padding: 12px 16px; border-radius: 12px 12px 4px 12px; margin-left: auto; max-width: 85%; word-wrap: break-word; font-size: 15px; }
-        .message-ai { background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 16px; border-radius: 12px 12px 12px 4px; margin-right: auto; max-width: 95%; }
-        .audit-trail-trigger { font-size: 11px; color: var(--text-secondary); cursor: pointer; text-decoration: underline; text-decoration-style: dotted; display: inline-block; margin-top: 12px; }
-        .audit-trail-trigger:hover { color: var(--text-primary); }
-        .audit-trail-details { background: var(--bg-primary); border: 1px solid var(--border-color); padding: 12px; border-radius: 6px; margin-top: 8px; font-size: 12px; color: var(--text-secondary); font-family: var(--font-mono); max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out, margin 0.3s ease-out; padding: 0 12px; margin: 0; }
-        .audit-trail-details.visible { max-height: 200px; padding: 12px; margin-top: 8px; }
-        .confidence-score { background: rgba(48, 209, 88, 0.2); border: 1px solid var(--accent-green); padding: 4px 8px; border-radius: 99px; font-size: 11px; font-weight: 500; color: var(--accent-green); display: inline-block; }
-        .chat-input { padding: 20px; border-top: 1px solid var(--border-color); background: var(--bg-primary); border-radius: 0 0 12px 12px; }
-        .input-container { display: flex; gap: 12px; align-items: center; }
-        .chat-input input { flex: 1; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px; outline: none; background: var(--bg-tertiary); color: var(--text-primary); }
-        .chat-input input:focus { border-color: var(--accent-blue); }
-        .icon-btn, .send-btn { background: var(--bg-tertiary); color: var(--text-secondary); padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .icon-btn:hover { background: #333; color: var(--text-primary); }
-        .send-btn { background: var(--accent-blue); color: white; padding: 10px 16px; font-weight: 500; border: none; }
-        .send-btn:hover { background: #0070e0; }
-        .response-card { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; margin-top: 12px; }
-        .response-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .response-title { font-weight: 600; color: var(--text-primary); font-size: 14px; }
-        .response-recommendation { background: rgba(10, 132, 255, 0.1); padding: 12px; border-radius: 6px; border-left: 3px solid var(--accent-blue); font-size: 14px; color: var(--text-primary); }
-        .response-recommendation strong { display: block; margin-bottom: 4px; color: var(--accent-blue);}
-        .response-recommendation ul { list-style-type: '• '; padding-left: 20px; margin: 0; }
-        .suggestion-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .suggestion-pill { background: var(--bg-tertiary); color: var(--text-secondary); padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border-color); }
-        .suggestion-pill:hover { background: var(--bg-secondary); color: var(--text-primary); }
-        .message-thinking { font-style: italic; background: rgba(10, 132, 255, 0.1); border: 1px solid rgba(10, 132, 255, 0.2); padding: 12px 16px; border-radius: 8px; font-size: 14px; color: var(--accent-blue); align-self: flex-start; }
-        .thinking-dots::after { content: ' .'; animation: dots 1.5s steps(5, end) infinite; }
-        @keyframes dots { 0%, 20% { content: ' .'; } 40% { content: ' ..'; } 60% { content: ' ...'; } 80%, 100% { content: ' ...'; } }
-
-        /* Responsive */
-        @media (max-width: 1400px) { .main-content { flex-direction: column; } .dashboard { max-width: 100%; } .chat-panel { width: 100%; max-height: 500px; position: static; } }
-        @media (max-width: 768px) { .sidebar { display: none; } .main-content { margin-left: 0; } .dashboard-grid, .performance-section, .small-widget-grid { grid-template-columns: 1fr; } }
+      /* Responsive */
+      @media (max-width: 1400px) {
+        .main-content {
+          flex-direction: column;
+        }
+        .dashboard {
+          max-width: 100%;
+        }
+        .chat-panel {
+          width: 100%;
+          max-height: 500px;
+          position: static;
+        }
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+        .main-content {
+          margin-left: 0;
+        }
+        .dashboard-grid,
+        .performance-section,
+        .small-widget-grid {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar">
-            <div class="logo"><h1>Fi Money AI</h1></div>
-            <a href="#" class="nav-item active"><div class="nav-icon"></div>Dashboard</a>
-            <a href="#" class="nav-item"><div class="nav-icon"></div>Transactions</a>
-            <a href="#" class="nav-item"><div class="nav-icon"></div>Goals</a>
-            <a href="#" class="nav-item"><div class="nav-icon"></div>Reports</a>
-            <a href="#" class="nav-item"><div class="nav-icon"></div>Settings</a>
-        </nav>
+      <!-- Sidebar Navigation -->
+      <nav class="sidebar">
+        <div class="logo"><h1>Fi Money AI</h1></div>
+        <a href="#" class="nav-item active"
+          ><div class="nav-icon"></div>
+          Dashboard</a
+        >
+        <a href="#" class="nav-item"
+          ><div class="nav-icon"></div>
+          Transactions</a
+        >
+        <a href="#" class="nav-item"
+          ><div class="nav-icon"></div>
+          Goals</a
+        >
+        <a href="#" class="nav-item"
+          ><div class="nav-icon"></div>
+          Reports</a
+        >
+        <a href="#" class="nav-item"
+          ><div class="nav-icon"></div>
+          Settings</a
+        >
+      </nav>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="dashboard">
-                <!-- Header -->
-                <header class="header">
-                    <h2>Dashboard</h2>
-                    <div class="user-info">
-                        <div class="notification-bell"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><div class="notification-dot"></div></div>
-                        <div class="avatar">AR</div>
-                        <span>Arjun Reddy</span>
-                    </div>
-                </header>
-                <div class="ai-summary-card">
-                    <span class="material-symbols-outlined">auto_awesome</span>
-                    <div class="ai-summary-text">
-                        <p><strong>Here's your weekly summary:</strong> Your spending is down 8% compared to last week, mainly in 'Dining Out'. You're on track for your Emergency Fund goal. Keep it up!</p>
-                    </div>
-                </div>
-
-                <!-- Dashboard Grid -->
-                <div class="dashboard-grid">
-                    <div class="card net-worth">
-                        <h3>Net Worth</h3>
-                        <div class="net-worth-value">₹24,56,780</div>
-                        <div class="net-worth-change">+₹45,230 (+1.87%) this month</div>
-                        <div class="metric-grid">
-                            <div class="metric-card"><div class="metric-label">Assets</div><div class="metric-value">₹28,90,450</div></div>
-                            <div class="metric-card"><div class="metric-label">Liabilities</div><div class="metric-value">₹4,33,670</div></div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3>Monthly Cashflow</h3>
-                        <!-- GRAPH: Monthly Cashflow -->
-                        <div class="cashflow-chart-container">
-                            <div class="cashflow-chart" style="--anim-delay: 0s;">
-                                <div class="chart-bar-group"><div class="bar income" style="height: 80%; animation-delay: 0.1s;"></div><div class="bar expense" style="height: 55%; animation-delay: 0.1s;"></div></div>
-                                <div class="chart-bar-group"><div class="bar income" style="height: 75%; animation-delay: 0.2s;"></div><div class="bar expense" style="height: 65%; animation-delay: 0.2s;"></div></div>
-                                <div class="chart-bar-group"><div class="bar income" style="height: 90%; animation-delay: 0.3s;"></div><div class="bar expense" style="height: 60%; animation-delay: 0.3s;"></div></div>
-                                <div class="chart-bar-group"><div class="bar income" style="height: 85%; animation-delay: 0.4s;"></div><div class="bar expense" style="height: 70%; animation-delay: 0.4s;"></div></div>
-                                <div class="chart-bar-group"><div class="bar income" style="height: 80%; animation-delay: 0.5s;"></div><div class="bar expense" style="height: 75%; animation-delay: 0.5s;"></div></div>
-                                <div class="chart-bar-group"><div class="bar income" style="height: 100%; animation-delay: 0.6s;"></div><div class="bar expense" style="height: 70%; animation-delay: 0.6s;"></div></div>
-                            </div>
-                            <div class="chart-labels">
-                                <span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Small Widgets Grid -->
-                <div class="small-widget-grid">
-                    <div class="card health-score-card">
-                        <h3>Investment Health</h3>
-                        <!-- GRAPH: Investment Health Score (Doughnut) -->
-                        <div class="doughnut-chart-container">
-                            <div class="doughnut-chart">
-                                <div class="doughnut-center">
-                                    <div class="health-score-value">89</div>
-                                    <div class="health-score-label">Score</div>
-                                </div>
-                            </div>
-                        </div>
-                         <div class="metric-label" style="text-align: center;">60% Equity · 25% Debt · 15% Alts</div>
-                    </div>
-                    <div class="card">
-                        <h3>Financial Wellness</h3>
-                        <!-- GRAPH: Financial Wellness Score -->
-                        <div class="wellness-metric">
-                            <div class="wellness-header"><span class="wellness-label">Savings Rate</span><span class="wellness-value">30% (Good)<span class="trend-arrow up">↑</span></span></div>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 75%; background-color: var(--accent-green);"></div></div>
-                        </div>
-                         <div class="wellness-metric">
-                            <div class="wellness-header"><span class="wellness-label">Debt Coverage</span><span class="wellness-value">4.5x (Healthy)<span class="trend-arrow up">↑</span></span></div>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 85%; background-color: var(--accent-green);"></div></div>
-                        </div>
-                         <div class="wellness-metric">
-                            <div class="wellness-header"><span class="wellness-label">Emergency Fund</span><span class="wellness-value">4/6 Months<span class="trend-arrow up">↑</span></span></div>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 66%; background-color: var(--accent-yellow);"></div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Insights Section -->
-                <div class="insights-section">
-                    <h3>Proactive AI Insights</h3>
-                    <div class="insights-grid">
-                        <div class="insight-card info">
-                            <div class="insight-header"><div class="insight-title">Idle Cash Detected</div><div class="insight-badge info">Opportunity</div></div>
-                            <div class="insight-text">You have ₹75,000 idle in your savings account. Consider a Liquid Fund for better returns (~7% p.a.).</div>
-                            <a href="#" class="insight-action" onclick="askQuestion('Suggest liquid funds for idle cash')">Explore Funds</a>
-                        </div>
-                        <div class="insight-card warning">
-                            <div class="insight-header"><div class="insight-title">High-Interest EMI</div><div class="insight-badge warning">Attention</div></div>
-                            <div class="insight-text">Your personal loan EMI has a high interest rate of 14.5%. You could save ~₹1,200/month by refinancing.</div>
-                            <a href="#" class="insight-action">Check Options</a>
-                        </div>
-                        <div class="insight-card success">
-                            <div class="insight-header"><div class="insight-title">Tax Saving Opportunity</div><div class="insight-badge success">Plan Ahead</div></div>
-                            <div class="insight-text">You have ₹50,000 remaining in your 80C limit. Investing in an ELSS fund can help you save up to ₹15,600 in tax.</div>
-                            <a href="#" class="insight-action" onclick="askQuestion('Suggest top ELSS funds')">View ELSS Funds</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Performance Section -->
-                <div class="performance-section">
-                    <div class="card">
-                        <h3>SIP Performance Tracker</h3>
-                        <!-- GRAPH: SIP Performance Tracker -->
-                        <div class="sip-list">
-                            <div class="sip-item">
-                                <div class="sip-details">
-                                    <div class="sip-name">Axis Bluechip Fund</div>
-                                    <div class="sip-performance">-4% vs NIFTY 50 (+8%)</div>
-                                    <div class="performance-strip">
-                                        <div class="strip-fill negative" style="width: 30%;"></div>
-                                        <div class="strip-benchmark" style="left: 60%;"></div>
-                                    </div>
-                                </div>
-                                <div class="performance-delta negative">-12%</div>
-                            </div>
-                            <div class="sip-item">
-                                <div class="sip-details">
-                                    <div class="sip-name">HDFC Mid Cap</div>
-                                    <div class="sip-performance">+18% vs NIFTY MidCap (+10%)</div>
-                                    <div class="performance-strip">
-                                        <div class="strip-fill positive" style="width: 80%;"></div>
-                                        <div class="strip-benchmark" style="left: 50%;"></div>
-                                    </div>
-                                </div>
-                                <div class="performance-delta positive">+8%</div>
-                            </div>
-                            <div class="sip-item">
-                                <div class="sip-details">
-                                    <div class="sip-name">SBI Small Cap</div>
-                                    <div class="sip-performance">+25% vs NIFTY SmallCap (+10%)</div>
-                                    <div class="performance-strip">
-                                        <div class="strip-fill positive" style="width: 95%;"></div>
-                                        <div class="strip-benchmark" style="left: 40%;"></div>
-                                    </div>
-                                </div>
-                                <div class="performance-delta positive">+15%</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h3>Goal Timeline</h3>
-                        <!-- GRAPH: Goal Timeline -->
-                        <div class="goal-timeline-container">
-                            <div class="goal-item">
-                                <div class="wellness-header"><span class="wellness-label">Emergency Fund</span><span class="wellness-value">78%</span></div>
-                                <div class="progress-bar"><div class="progress-fill" style="width: 78%; background-color: var(--accent-green);"></div></div>
-                                <div class="goal-info"><span>₹3.9L / ₹5L</span><span>ETA: Mar 2025</span></div>
-                            </div>
-                            <div class="goal-item">
-                                <div class="wellness-header"><span class="wellness-label">Home Purchase</span><span class="wellness-value">34%</span></div>
-                                <div class="progress-bar"><div class="progress-fill" style="width: 34%; background-color: var(--accent-blue);"></div></div>
-                                <div class="goal-info"><span>₹8.5L / ₹25L</span><span>ETA: Dec 2028</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="dashboard">
+          <!-- Header -->
+          <header class="header">
+            <h2>Dashboard</h2>
+            <div class="user-info">
+              <div class="notification-bell">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <div class="notification-dot"></div>
+              </div>
+              <div class="avatar">AR</div>
+              <span>Arjun Reddy</span>
             </div>
+          </header>
+          <div class="ai-summary-card">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            <div class="ai-summary-text">
+              <p>
+                <strong>Here's your weekly summary:</strong> Your spending is
+                down 8% compared to last week, mainly in 'Dining Out'. You're on
+                track for your Emergency Fund goal. Keep it up!
+              </p>
+            </div>
+          </div>
 
-            <!-- Chat Assistant Panel -->
-            <aside class="chat-panel" id="chatPanel">
-                <header class="chat-header">
-                    <div class="ai-avatar">AI</div>
-                    <div>
-                        <div class="chat-title">Finance Assistant</div>
-                        <div style="font-size: 12px; color: var(--text-secondary);">Powered by Gemini & Fi MCP</div>
-                    </div>
-                </header>
-                <div class="chat-history" id="chatHistory">
-                    <div class="chat-message">
-                        <div class="message-ai">
-                            <div style="margin-bottom: 12px;">Hello Arjun. I'm your AI finance assistant. How can I help you today?</div>
-                            <div class="suggestion-pills">
-                                <div class="suggestion-pill" onclick="askQuestion('How can I reduce my tax liability?')">Tax optimization</div>
-                                <div class="suggestion-pill" onclick="askQuestion('Am I on track for retirement?')">Retirement planning</div>
-                            </div>
-                        </div>
-                    </div>
+          <!-- Dashboard Grid -->
+          <div class="dashboard-grid">
+            <div class="card net-worth">
+              <h3>Net Worth</h3>
+              <div class="net-worth-value">₹24,56,780</div>
+              <div class="net-worth-change">+₹45,230 (+1.87%) this month</div>
+              <div class="metric-grid">
+                <div class="metric-card">
+                  <div class="metric-label">Assets</div>
+                  <div class="metric-value">₹28,90,450</div>
                 </div>
-                <div class="chat-input">
-                    <div class="input-container">
-                        <input type="text" placeholder="Ask about your finances..." id="chatInput">
-                        <button class="icon-btn" aria-label="Use voice query">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line></svg>
-                        </button>
-                        <button class="send-btn" onclick="sendMessage()">Send</button>
-                    </div>
+                <div class="metric-card">
+                  <div class="metric-label">Liabilities</div>
+                  <div class="metric-value">₹4,33,670</div>
                 </div>
-            </aside>
-        </main>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Monthly Cashflow</h3>
+              <!-- GRAPH: Monthly Cashflow -->
+              <div class="cashflow-chart-container">
+                <div class="cashflow-chart" style="--anim-delay: 0s">
+                  <div class="chart-bar-group">
+                    <div
+                      class="bar income"
+                      style="height: 80%; animation-delay: 0.1s"
+                    ></div>
+                    <div
+                      class="bar expense"
+                      style="height: 55%; animation-delay: 0.1s"
+                    ></div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="bar income"
+                      style="height: 75%; animation-delay: 0.2s"
+                    ></div>
+                    <div
+                      class="bar expense"
+                      style="height: 65%; animation-delay: 0.2s"
+                    ></div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="bar income"
+                      style="height: 90%; animation-delay: 0.3s"
+                    ></div>
+                    <div
+                      class="bar expense"
+                      style="height: 60%; animation-delay: 0.3s"
+                    ></div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="bar income"
+                      style="height: 85%; animation-delay: 0.4s"
+                    ></div>
+                    <div
+                      class="bar expense"
+                      style="height: 70%; animation-delay: 0.4s"
+                    ></div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="bar income"
+                      style="height: 80%; animation-delay: 0.5s"
+                    ></div>
+                    <div
+                      class="bar expense"
+                      style="height: 75%; animation-delay: 0.5s"
+                    ></div>
+                  </div>
+                  <div class="chart-bar-group">
+                    <div
+                      class="bar income"
+                      style="height: 100%; animation-delay: 0.6s"
+                    ></div>
+                    <div
+                      class="bar expense"
+                      style="height: 70%; animation-delay: 0.6s"
+                    ></div>
+                  </div>
+                </div>
+                <div class="chart-labels">
+                  <span>Apr</span><span>May</span><span>Jun</span
+                  ><span>Jul</span><span>Aug</span><span>Sep</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Small Widgets Grid -->
+          <div class="small-widget-grid">
+            <div class="card health-score-card">
+              <h3>Investment Health</h3>
+              <!-- GRAPH: Investment Health Score (Doughnut) -->
+              <div class="doughnut-chart-container">
+                <div class="doughnut-chart">
+                  <div class="doughnut-center">
+                    <div class="health-score-value">89</div>
+                    <div class="health-score-label">Score</div>
+                  </div>
+                </div>
+              </div>
+              <div class="metric-label" style="text-align: center">
+                60% Equity · 25% Debt · 15% Alts
+              </div>
+            </div>
+            <div class="card">
+              <h3>Financial Wellness</h3>
+              <!-- GRAPH: Financial Wellness Score -->
+              <div class="wellness-metric">
+                <div class="wellness-header">
+                  <span class="wellness-label">Savings Rate</span
+                  ><span class="wellness-value"
+                    >30% (Good)<span class="trend-arrow up">↑</span></span
+                  >
+                </div>
+                <div class="progress-bar">
+                  <div
+                    class="progress-fill"
+                    style="width: 75%; background-color: var(--accent-green)"
+                  ></div>
+                </div>
+              </div>
+              <div class="wellness-metric">
+                <div class="wellness-header">
+                  <span class="wellness-label">Debt Coverage</span
+                  ><span class="wellness-value"
+                    >4.5x (Healthy)<span class="trend-arrow up">↑</span></span
+                  >
+                </div>
+                <div class="progress-bar">
+                  <div
+                    class="progress-fill"
+                    style="width: 85%; background-color: var(--accent-green)"
+                  ></div>
+                </div>
+              </div>
+              <div class="wellness-metric">
+                <div class="wellness-header">
+                  <span class="wellness-label">Emergency Fund</span
+                  ><span class="wellness-value"
+                    >4/6 Months<span class="trend-arrow up">↑</span></span
+                  >
+                </div>
+                <div class="progress-bar">
+                  <div
+                    class="progress-fill"
+                    style="width: 66%; background-color: var(--accent-yellow)"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insights Section -->
+          <div class="insights-section">
+            <h3>Proactive AI Insights</h3>
+            <div class="insights-grid">
+              <div class="insight-card info">
+                <div class="insight-header">
+                  <div class="insight-title">Idle Cash Detected</div>
+                  <div class="insight-badge info">Opportunity</div>
+                </div>
+                <div class="insight-text">
+                  You have ₹75,000 idle in your savings account. Consider a
+                  Liquid Fund for better returns (~7% p.a.).
+                </div>
+                <a
+                  href="#"
+                  class="insight-action"
+                  onclick="askQuestion('Suggest liquid funds for idle cash')"
+                  >Explore Funds</a
+                >
+              </div>
+              <div class="insight-card warning">
+                <div class="insight-header">
+                  <div class="insight-title">High-Interest EMI</div>
+                  <div class="insight-badge warning">Attention</div>
+                </div>
+                <div class="insight-text">
+                  Your personal loan EMI has a high interest rate of 14.5%. You
+                  could save ~₹1,200/month by refinancing.
+                </div>
+                <a href="#" class="insight-action">Check Options</a>
+              </div>
+              <div class="insight-card success">
+                <div class="insight-header">
+                  <div class="insight-title">Tax Saving Opportunity</div>
+                  <div class="insight-badge success">Plan Ahead</div>
+                </div>
+                <div class="insight-text">
+                  You have ₹50,000 remaining in your 80C limit. Investing in an
+                  ELSS fund can help you save up to ₹15,600 in tax.
+                </div>
+                <a
+                  href="#"
+                  class="insight-action"
+                  onclick="askQuestion('Suggest top ELSS funds')"
+                  >View ELSS Funds</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Performance Section -->
+          <div class="performance-section">
+            <div class="card">
+              <h3>SIP Performance Tracker</h3>
+              <!-- GRAPH: SIP Performance Tracker -->
+              <div class="sip-list">
+                <div class="sip-item">
+                  <div class="sip-details">
+                    <div class="sip-name">Axis Bluechip Fund</div>
+                    <div class="sip-performance">-4% vs NIFTY 50 (+8%)</div>
+                    <div class="performance-strip">
+                      <div class="strip-fill negative" style="width: 30%"></div>
+                      <div class="strip-benchmark" style="left: 60%"></div>
+                    </div>
+                  </div>
+                  <div class="performance-delta negative">-12%</div>
+                </div>
+                <div class="sip-item">
+                  <div class="sip-details">
+                    <div class="sip-name">HDFC Mid Cap</div>
+                    <div class="sip-performance">
+                      +18% vs NIFTY MidCap (+10%)
+                    </div>
+                    <div class="performance-strip">
+                      <div class="strip-fill positive" style="width: 80%"></div>
+                      <div class="strip-benchmark" style="left: 50%"></div>
+                    </div>
+                  </div>
+                  <div class="performance-delta positive">+8%</div>
+                </div>
+                <div class="sip-item">
+                  <div class="sip-details">
+                    <div class="sip-name">SBI Small Cap</div>
+                    <div class="sip-performance">
+                      +25% vs NIFTY SmallCap (+10%)
+                    </div>
+                    <div class="performance-strip">
+                      <div class="strip-fill positive" style="width: 95%"></div>
+                      <div class="strip-benchmark" style="left: 40%"></div>
+                    </div>
+                  </div>
+                  <div class="performance-delta positive">+15%</div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Goal Timeline</h3>
+              <!-- GRAPH: Goal Timeline -->
+              <div class="goal-timeline-container">
+                <div class="goal-item">
+                  <div class="wellness-header">
+                    <span class="wellness-label">Emergency Fund</span
+                    ><span class="wellness-value">78%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-fill"
+                      style="width: 78%; background-color: var(--accent-green)"
+                    ></div>
+                  </div>
+                  <div class="goal-info">
+                    <span>₹3.9L / ₹5L</span><span>ETA: Mar 2025</span>
+                  </div>
+                </div>
+                <div class="goal-item">
+                  <div class="wellness-header">
+                    <span class="wellness-label">Home Purchase</span
+                    ><span class="wellness-value">34%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-fill"
+                      style="width: 34%; background-color: var(--accent-blue)"
+                    ></div>
+                  </div>
+                  <div class="goal-info">
+                    <span>₹8.5L / ₹25L</span><span>ETA: Dec 2028</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Assistant Panel -->
+        <aside class="chat-panel" id="chatPanel">
+          <header class="chat-header">
+            <div class="ai-avatar">AI</div>
+            <div>
+              <div class="chat-title">Finance Assistant</div>
+              <div style="font-size: 12px; color: var(--text-secondary)">
+                Powered by Gemini & Fi MCP
+              </div>
+            </div>
+          </header>
+          <div class="chat-history" id="chatHistory">
+            <div class="chat-message">
+              <div class="message-ai">
+                <div style="margin-bottom: 12px">
+                  Hello Arjun. I'm your AI finance assistant. How can I help you
+                  today?
+                </div>
+                <div class="suggestion-pills">
+                  <div
+                    class="suggestion-pill"
+                    onclick="askQuestion('How can I reduce my tax liability?')"
+                  >
+                    Tax optimization
+                  </div>
+                  <div
+                    class="suggestion-pill"
+                    onclick="askQuestion('Am I on track for retirement?')"
+                  >
+                    Retirement planning
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chat-input">
+            <div class="input-container">
+              <input
+                type="text"
+                placeholder="Ask about your finances..."
+                id="chatInput"
+              />
+              <button class="icon-btn" aria-label="Use voice query">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+                  ></path>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                  <line x1="12" y1="19" x2="12" y2="23"></line>
+                </svg>
+              </button>
+              <button class="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+          </div>
+        </aside>
+      </main>
     </div>
 
     <script>
-        const chatInput = document.getElementById('chatInput');
-        const chatHistory = document.getElementById('chatHistory');
-        
-        function toggleAudit(element) {
-            const details = element.nextElementSibling;
-            if (details && details.classList.contains('audit-trail-details')) {
-                details.classList.toggle('visible');
-            }
+      const chatInput = document.getElementById("chatInput");
+      const chatHistory = document.getElementById("chatHistory");
+
+      function toggleAudit(element) {
+        const details = element.nextElementSibling;
+        if (details && details.classList.contains("audit-trail-details")) {
+          details.classList.toggle("visible");
         }
+      }
 
-        function sendMessage() {
-            const message = chatInput.value.trim();
-            if (message) {
-                addMessage(message, 'user');
-                chatInput.value = '';
-                setTimeout(() => { addAIResponse(message); }, 500);
-            }
+      function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+          addMessage(message, "user");
+          chatInput.value = "";
+          setTimeout(() => {
+            addAIResponse(message);
+          }, 500);
         }
+      }
 
-        chatInput.addEventListener('keydown', (event) => { if (event.key === 'Enter') sendMessage(); });
-        function askQuestion(question) { chatInput.value = question; sendMessage(); }
-        
-        function addMessage(message, type) {
-            const messageWrapper = document.createElement('div');
-            messageWrapper.className = 'chat-message';
-            if (type === 'user') {
-                messageWrapper.innerHTML = `<div class="message-user">${message}</div>`;
-            }
-            chatHistory.appendChild(messageWrapper);
-            chatHistory.scrollTop = chatHistory.scrollHeight;
+      chatInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") sendMessage();
+      });
+      function askQuestion(question) {
+        chatInput.value = question;
+        sendMessage();
+      }
+
+      function addMessage(message, type) {
+        const messageWrapper = document.createElement("div");
+        messageWrapper.className = "chat-message";
+        if (type === "user") {
+          messageWrapper.innerHTML = `<div class="message-user">${message}</div>`;
         }
+        chatHistory.appendChild(messageWrapper);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+      }
 
-        function addAIResponse(originalMessage) {
-            let responseHTML = '';
-            const normalizedMessage = originalMessage.toLowerCase().replace(/[?.]/g, '');
-            const messageWrapper = document.createElement('div');
-            messageWrapper.className = 'chat-message';
-            
-            // Thinking message
-            messageWrapper.innerHTML = `<div class="message-ai"><div class="message-thinking thinking-dots">Analyzing...</div></div>`;
-            chatHistory.appendChild(messageWrapper);
-            chatHistory.scrollTop = chatHistory.scrollHeight;
+      function addAIResponse(originalMessage) {
+        let responseHTML = "";
+        const normalizedMessage = originalMessage
+          .toLowerCase()
+          .replace(/[?.]/g, "");
+        const messageWrapper = document.createElement("div");
+        messageWrapper.className = "chat-message";
 
-            // Canned responses for simulation
-            const cannedResponses = {
-                'how can i reduce my tax liability': `
+        // Thinking message
+        messageWrapper.innerHTML = `<div class="message-ai"><div class="message-thinking thinking-dots">Analyzing...</div></div>`;
+        chatHistory.appendChild(messageWrapper);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+
+        // Canned responses for simulation
+        const cannedResponses = {
+          "how can i reduce my tax liability": `
                     <div style="margin-bottom: 12px;">Based on your income and investments, here are tax optimization strategies:</div>
                     <div class="response-card">
                         <div class="response-header"><div class="response-title">Tax Saving Opportunities</div><div class="confidence-score">92% Confidence</div></div>
@@ -471,7 +1315,7 @@
                     </div>
                     <div class="audit-trail-trigger" onclick="toggleAudit(this)">How was this generated?</div>
                     <div class="audit-trail-details">[Agent Orchestration]<br>Query -> TaxOptimizerAgent<br>Tool Call -> Section80C_Checker()</div>`,
-                'am i on track for retirement': `
+          "am i on track for retirement": `
                     <div style="margin-bottom: 12px;">Let me analyze your retirement readiness:</div>
                     <div class="response-card">
                         <div class="response-header"><div class="response-title">Retirement Analysis (Age 60)</div><div class="confidence-score">94% Confidence</div></div>
@@ -483,29 +1327,25 @@
                     <div class="suggestion-pills"><div class="suggestion-pill" onclick="askQuestion('How to increase my SIP?')">How to increase my SIP?</div></div>
                     <div class="audit-trail-trigger" onclick="toggleAudit(this)">How was this generated?</div>
                     <div class="audit-trail-details">[Agent Orchestration]<br>Query -> GoalPlannerAgent<br>Tool Call -> RetirementCorpus_Projector()</div>`,
-                 'why did my sip underperform': `
+          "why did my sip underperform": `
                     <div style="margin-bottom: 12px;">I've analyzed your <strong>Axis Bluechip SIP</strong> performance. Here's the breakdown:</div>
                     <div class="response-card">
                         <div class="response-header"><div class="response-title">Performance Analysis</div><div class="confidence-score">95% Confidence</div></div>
                         <div class="response-recommendation"><strong>Key Factors:</strong><ul><li>Recent correction in the Banking sector (-18%).</li><li>Volatility in the IT sector (13% of portfolio).</li></ul></div>
                     </div>
                     <div class="audit-trail-trigger" onclick="toggleAudit(this)">How was this generated?</div>
-                    <div class="audit-trail-details">[Agent Orchestration]<br>Query -> SIP_Optimizer<br>API Call -> Fi_MCP_API, NSE_Benchmark_Data</div>`
-            };
-            
-            responseHTML = cannedResponses[normalizedMessage] || `<div style="margin-bottom: 12px;">I can provide deep financial insights. For a general query like that, I recommend trying one of the suggestions.</div>`;
-            
-            setTimeout(() => {
-                messageWrapper.innerHTML = `<div class="message-ai">${responseHTML}</div>`;
-                chatHistory.scrollTop = chatHistory.scrollHeight;
-            }, 1200);
-        }
+                    <div class="audit-trail-details">[Agent Orchestration]<br>Query -> SIP_Optimizer<br>API Call -> Fi_MCP_API, NSE_Benchmark_Data</div>`,
+        };
+
+        responseHTML =
+          cannedResponses[normalizedMessage] ||
+          `<div style="margin-bottom: 12px;">I can provide deep financial insights. For a general query like that, I recommend trying one of the suggestions.</div>`;
+
+        setTimeout(() => {
+          messageWrapper.innerHTML = `<div class="message-ai">${responseHTML}</div>`;
+          chatHistory.scrollTop = chatHistory.scrollHeight;
+        }, 1200);
+      }
     </script>
-</body>
+  </body>
 </html>
-
-
-
-
-
-
