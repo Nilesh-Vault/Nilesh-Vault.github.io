@@ -19,12 +19,27 @@
         .bg-light-blue {
             background-color: #E3F2FD;
         }
-        /* New CSS to ensure links are always blue */
+
+        /* NEW OR MODIFIED CSS RULES BELOW */
+
+        /* Ensure all <a> tags are blue by default and when visited */
         a {
-            color: #1976D2; /* Apply the accent blue color to all links by default */
+            color: #1976D2; /* Forces all links to be this blue */
         }
-        a:hover {
-            text-decoration: underline; /* Add underline on hover if desired, but keep the color */
+
+        /* Ensure links within the checkpoint divs retain the accent blue color */
+        .p-5 a {
+            color: #1976D2;
+        }
+
+        /* If you still want the underline only on hover, keep this */
+        .p-5 a:hover {
+            text-decoration: underline;
+        }
+
+        /* For the "View Route on Map" buttons, keep their existing styles which are working */
+        .inline-block.mt-3.text-sm.text-white.bg-accent-blue.px-4.py-2.rounded-full.shadow-sm:hover {
+            background-color: #1976D2; /* Or a darker blue if you prefer */
         }
     </style>
 </head>
@@ -43,7 +58,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">August 2 (Day 1): Dehradun to Rishikesh</h2>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Activity:</span> Travel to Rishikesh.</p>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Duration:</span> ~1 hr 21 mins (45.9 km) by road.</p>
-                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Rishikesh" target="_blank">Rishikesh</a></p>
+                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Rishikesh" target="_blank" class="text-accent-blue">Rishikesh</a></p>
                 <a href="https://www.google.com/maps/dir/Dehradun/Rishikesh" target="_blank" class="inline-block mt-3 text-sm text-white bg-accent-blue px-4 py-2 rounded-full shadow-sm hover:bg-blue-700 transition-colors">View Route on Map</a>
             </div>
 
@@ -51,7 +66,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">August 3 (Day 2): Rishikesh to Govindghat</h2>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Activity:</span> Long drive to Govindghat.</p>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Duration:</span> 4-5 hours (250 km) by road.</p>
-                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Govindghat" target="_blank">Govindghat</a></p>
+                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Govindghat" target="_blank" class="text-accent-blue">Govindghat</a></p>
                 <a href="https://www.google.com/maps/dir/Rishikesh/Govindghat" target="_blank" class="inline-block mt-3 text-sm text-white bg-accent-blue px-4 py-2 rounded-full shadow-sm hover:bg-blue-700 transition-colors">View Route on Map</a>
             </div>
 
@@ -59,7 +74,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">August 4 (Day 3): Govindghat to Ghangaria</h2>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Activity:</span> Trek to Ghangaria.</p>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Duration:</span> 5-6 hours (10 km trek after 4km motorable road).</p>
-                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Ghangaria" target="_blank">Ghangaria</a></p>
+                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Ghangaria" target="_blank" class="text-accent-blue">Ghangaria</a></p>
                 <a href="https://www.google.com/maps/dir/Govindghat/Ghangaria" target="_blank" class="inline-block mt-3 text-sm text-white bg-accent-blue px-4 py-2 rounded-full shadow-sm hover:bg-blue-700 transition-colors">View Route on Map</a>
             </div>
 
@@ -67,7 +82,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">August 5 (Day 4): Valley of Flowers (VoF)</h2>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Activity:</span> Explore Valley of Flowers.</p>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Duration:</span> 5-6 hours (8 km round trip trek).</p>
-                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Ghangaria" target="_blank">Ghangaria</a></p>
+                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Ghangaria" target="_blank" class="text-accent-blue">Ghangaria</a></p>
                 <a href="https://www.google.com/maps/search/Valley+of+Flowers+National+Park" target="_blank" class="inline-block mt-3 text-sm text-white bg-accent-blue px-4 py-2 rounded-full shadow-sm hover:bg-blue-700 transition-colors">View Location on Map</a>
             </div>
 
@@ -75,7 +90,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">August 6 (Day 5): Hemkund Sahib</h2>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Activity:</span> Trek to Hemkund Sahib.</p>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Duration:</span> 6-9 hours (12 km round trip trek).</p>
-                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Ghangaria" target="_blank">Ghangaria</a></p>
+                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Ghangaria" target="_blank" class="text-accent-blue">Ghangaria</a></p>
                 <a href="https://www.google.com/maps/search/Hemkund+Sahib" target="_blank" class="inline-block mt-3 text-sm text-white bg-accent-blue px-4 py-2 rounded-full shadow-sm hover:bg-blue-700 transition-colors">View Location on Map</a>
             </div>
 
@@ -83,7 +98,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">August 7 (Day 6): Ghangaria to Badrinath</h2>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Activity:</span> Trek to Govindghat, then drive to Badrinath.</p>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Duration:</span> Trek: 5-6 hours (10-11 km); Drive: ~33 mins (25.2 km).</p>
-                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Badrinath" target="_blank">Badrinath</a></p>
+                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Badrinath" target="_blank" class="text-accent-blue">Badrinath</a></p>
                 <a href="https://www.google.com/maps/dir/Ghangaria/Badrinath" target="_blank" class="inline-block mt-3 text-sm text-white bg-accent-blue px-4 py-2 rounded-full shadow-sm hover:bg-blue-700 transition-colors">View Route on Map</a>
             </div>
 
@@ -91,7 +106,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">August 8 (Day 7): Badrinath Exploration</h2>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Activity:</span> Full day for Badrinath Temple darshan and local sightseeing.</p>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Duration:</span> Full Day.</p>
-                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Badrinath" target="_blank">Badrinath</a></p>
+                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Badrinath" target="_blank" class="text-accent-blue">Badrinath</a></p>
                 <a href="https://www.google.com/maps/search/Badrinath" target="_blank" class="inline-block mt-3 text-sm text-white bg-accent-blue px-4 py-2 rounded-full shadow-sm hover:bg-blue-700 transition-colors">View Location on Map</a>
             </div>
 
@@ -99,7 +114,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">August 9 (Day 8): Badrinath to Rishikesh</h2>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Activity:</span> Long drive back to Rishikesh.</p>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Duration:</span> ~5 hours (200+ km) by road.</p>
-                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Rishikesh" target="_blank">Rishikesh</a></p>
+                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Rishikesh" target="_blank" class="text-accent-blue">Rishikesh</a></p>
                 <a href="https://www.google.com/maps/dir/Badrinath/Rishikesh" target="_blank" class="inline-block mt-3 text-sm text-white bg-accent-blue px-4 py-2 rounded-full shadow-sm hover:bg-blue-700 transition-colors">View Route on Map</a>
             </div>
 
@@ -107,7 +122,7 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-2">August 10 (Day 9): Rishikesh to Dehradun</h2>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Activity:</span> Short travel to Dehradun.</p>
                 <p class="text-gray-700 mb-1"><span class="font-medium">Duration:</span> ~1 hr 21 mins (45.9 km) by road.</p>
-                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Dehradun" target="_blank">Dehradun</a> (or onward travel).</p>
+                <p class="text-gray-700 mb-1"><span class="font-medium">Overnight Stay:</span> <a href="https://www.google.com/maps/search/Dehradun" target="_blank" class="text-accent-blue">Dehradun</a> (or onward travel).</p>
                 <a href="https://www.google.com/maps/dir/Rishikesh/Dehradun" target="_blank" class="inline-block mt-3 text-sm text-white bg-accent-blue px-4 py-2 rounded-full shadow-sm hover:bg-blue-700 transition-colors">View Route on Map</a>
             </div>
 
