@@ -18,6 +18,7 @@ def clean_ticket_text(text: str) -> str:
         return ""
 
     # Remove HTML tags
+    https://huggingface.co/sentence-transformers/paraphrase-distilroberta-base-v1
     pip install pandas openpyxl scikit-learn sentence-transformers matplotlib
 
 def find_optimal_clusters(embeddings, max_k=20):
