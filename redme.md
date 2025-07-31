@@ -18,6 +18,16 @@ def clean_ticket_text(text: str) -> str:
         return ""
 
     # Remove HTML tags
+
+    # Download the configuration files
+curl -O https://huggingface.co/sentence-transformers/paraphrase-distilroberta-base-v1/resolve/main/config.json
+curl -O https://huggingface.co/sentence-transformers/paraphrase-distilroberta-base-v1/resolve/main/tokenizer.json
+curl -O https://huggingface.co/sentence-transformers/paraphrase-distilroberta-base-v1/resolve/main/tokenizer_config.json
+curl -O https://huggingface.co/sentence-transformers/paraphrase-distilroberta-base-v1/resolve/main/special_tokens_map.json
+curl -O https://huggingface.co/sentence-transformers/paraphrase-distilroberta-base-v1/resolve/main/modules.json
+
+# Download the main model file (this one is larger)
+curl -O https://huggingface.co/sentence-transformers/paraphrase-distilroberta-base-v1/resolve/main/pytorch_model.bin
     https://huggingface.co/sentence-transformers/paraphrase-distilroberta-base-v1
     pip install pandas openpyxl scikit-learn sentence-transformers matplotlib
 
