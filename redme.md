@@ -18,23 +18,7 @@ def clean_ticket_text(text: str) -> str:
         return ""
 
     # Remove HTML tags
-    text = re.sub(r'<[^>]+>', ' ', text)
-    
-    # Remove email headers and boilerplate text (case-insensitive)
-    patterns_to_remove = [
-        r'From:.*', r'Sent:.*', r'To:.*', r'Subject:.*',
-        r'CAUTION:.*', r'This email and any attachments.*'
-    ]
-    for pattern in patterns_to_remove:
-        text = re.sub(pattern, '', text, flags=re.IGNORECASE)
-
-    # Remove URLs
-    text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)
-    
-    # Remove extra whitespace and newlines
-    text = re.sub(r'\s+', ' ', text).strip()
-    
-    return text
+    pip install pandas openpyxl scikit-learn sentence-transformers matplotlib
 
 def find_optimal_clusters(embeddings, max_k=20):
     """
